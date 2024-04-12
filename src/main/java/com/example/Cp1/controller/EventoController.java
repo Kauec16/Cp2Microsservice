@@ -30,11 +30,11 @@ public class EventoController {
                          BindingResult result,
                          RedirectAttributes attributes) {
         if (result.hasErrors()) {
-            return "/evento/evento-novo";
+            return "/evento/evento-editar";
         }
         categoria = service.insert(categoria);
         attributes.addFlashAttribute("mensagem", "Categoria salva com sucesso!");
-        return "redirect:/evento";
+        return "redirect: /evento";
     }
 
 
@@ -60,7 +60,9 @@ public class EventoController {
     @GetMapping("/{id}")
     public String findById(@PathVariable("id") Long id, Model model) {
         Evento evento = service.findById(id);
-        model.addAttribute("categoria", evento);
+        model.addAttribute("evento", evento);
+        List<Cidade> cidades = cidadeService.findAll();
+        model.addAttribute("cidades", cidades);
         return "/evento/evento-editar";
     }
 
