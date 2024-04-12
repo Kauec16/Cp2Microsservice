@@ -10,16 +10,19 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Eventos</h1>
+                <h1>Eventos:</h1>
                 <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Estado</th>
+                        <th>Data</th>
+                        <th>URL</th>
+                        <th>Cidade</th>
+
                         <th>Deletar</th>
                         <th>
                             <a href="/evento/novo">
-                                <button class="btn btn-secondary btn-xs">Nova Evento</button>
+                                <button class="btn btn-secondary btn-xs">Novo Evento</button>
                             </a>
                         </th>
                     </tr>
@@ -31,12 +34,16 @@
                     </tr>
 
                     <tr th:each="evento : ${eventos}">
-                        <!--                        TD do nome-->
+
                         <td><span th:text="${evento.nome}"> Nome </span></td>
 
-                        <!--                                            TD do estado-->
-                        <td><span th:text="${evento.estado}"> Estado </span></td>
 
+                        <td><span th:text="${evento.data}"> Data </span></td>
+
+                        <td><span th:text="${evento.url}"> URL </span></td>
+
+
+                        <td><span th:text="${evento.cidade.nome}"> Cidade </span></td>
                         <td>
                             <form th:action="@{/evento/{id}(id=${evento.id})}" th:object="${evento}" method="post">
                                 <input type="hidden" name="_method" value="delete">

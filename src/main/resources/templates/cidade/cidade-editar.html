@@ -18,6 +18,7 @@
                 </div>
 
                 <form action="#" method="post" th:action="@{/cidade}" th:object="${cidade}">
+                    <input type="hidden" name="_method" value="put">
                     <div class="row mb-3">
                         <label class="col-sm-1 col-form-label" for="nome">Nome:</label>
                         <div class="col-sm-2">
