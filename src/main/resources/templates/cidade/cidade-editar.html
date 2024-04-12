@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{template.html}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Title</title>
+</head>
+<body>
+<h1>Editar</h1>
+<div layout:fragment="conteudo">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Editando cidade</h2>
+                <div class="alert alert-success alert-dismissible fade show" th:if="${mensagem}">
+                    <button class="btn-close" data-bs-dismiss="alert" type="button"></button>
+                    <span th:text="${mensagem}"></span>
+                </div>
+
+                <form action="#" method="post" th:action="@{/cidade}" th:object="${cidade}">
+                    <div class="row mb-3">
+                        <label class="col-sm-1 col-form-label" for="nome">Nome:</label>
+                        <div class="col-sm-2">
+                            <input class="form-control" id="nome" th:field="*{nome}" type="text">
+                        </div>
+                        <div class="col-sm-5">
+								<span class="mensagem text-danger" th:errors="*{nome}"
+                                      th:if="${#fields.hasErrors('nome')}"></span>
+                        </div>
+                    </div>
+
+
+                        <div class="row mb-3">
+                            <label class="col-sm-1 col-form-label" for="estado">Estado:</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" id="estado" th:field="*{estado}" type="text">
+                            </div>
+                            <div class="col-sm-5">
+								<span class="mensagem text-danger" th:errors="*{estado}"
+                                      th:if="${#fields.hasErrors('estado')}"></span>
+                            </div>
+                        </div>
+                    <input class="btn btn-primary" type="submit" value="Salvar"/>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br" layout:decorate="~{template.html}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<body>
+<div layout:fragment="conteudo">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Eventos</h1>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Estado</th>
+                        <th>Deletar</th>
+                        <th>
+                            <a href="/evento/novo">
+                                <button class="btn btn-secondary btn-xs">Nova Evento</button>
+                            </a>
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:if="${eventos.empty}">
+                        <td colspan="4">Lista de eventos Vasia</td>
+                    </tr>
+
+                    <tr th:each="evento : ${eventos}">
+                        <!--                        TD do nome-->
+                        <td><span th:text="${evento.nome}"> Nome </span></td>
+
+                        <!--                                            TD do estado-->
+                        <td><span th:text="${evento.estado}"> Estado </span></td>
+
+                        <td>
+                            <form th:action="@{/evento/{id}(id=${evento.id})}" th:object="${evento}" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <input class="btn btn-danger btn-xs" type="submit" value="Excluir"
+                                       th:data-confirm-delete="|Deseja excluir ${evento.nome}?|"
+                                       onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"/>
+                            </form>
+                        </td>
+
+                        <!--                        TD do botão Editar-->
+                        <td>
+                            <form action="#" th:action="@{/evento/{id}(id=${evento.id})}" th:object="${evento}"
+                                  method="get">
+                                <input class="btn btn-primary btn-xs" type="submit" value="Editar">
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>
